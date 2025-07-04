@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Subscription Plans{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/subscription.css') }}">
+{% endblock %}
+
+
+{% block content %}
+<!-- ✅ Navbar -->
+{% include 'partials/navbar.html' %}
+
+<div class="container">
+    <h2 class="text-center mb-5">Choose Your Subscription Plan</h2>
+    <div class="row justify-content-center g-4">
+        <!-- Weekly Plan -->
+        <div class="col-md-4">
+            <div class="plan-card">
+                <div class="plan-title">Weekly</div>
+                <div class="plan-price">Rs. 150</div>
+                <ul class="plan-features">
+                    <li>Access to All Books</li>
+                    <li>Recommended Reads Every Week</li>
+                    <li>Download Up to 10 Books</li>
+                    <li>Basic Reader Support</li>
+                </ul>
+                <button class="btn-purchase">Purchase</button>
+            </div>
+        </div>
+        <!-- Monthly Plan -->
+        <div class="col-md-4">
+            <div class="plan-card">
+                <div class="plan-title">Monthly</div>
+                <div class="plan-price">Rs. 200</div>
+                <ul class="plan-features">
+                    <li>Access to All Books</li>
+                    <li>Unlimited Recommendations</li>
+                    <li>Download Up to 50 Books</li>
+                    <li>Priority Email Support</li>
+                </ul>
+                <button class="btn-purchase">Purchase</button>
+            </div>
+        </div>
+        <!-- Yearly Plan -->
+        <div class="col-md-4">
+            <div class="plan-card">
+                <div class="plan-title">Yearly</div>
+                <div class="plan-price">Rs. 300</div>
+                <ul class="plan-features">
+                    <li>Access to All Books</li>
+                    <li>Premium Recommendations</li>
+                    <li>Unlimited Downloads</li>
+                    <li>1-on-1 Reading Sessions</li>
+                </ul>
+                <button class="btn-purchase">Purchase</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ✅ Footer -->
+{% include 'partials/footer.html' %}
+{% endblock %}

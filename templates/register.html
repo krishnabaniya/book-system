@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="main-container">
+    <!-- Top Box -->
+    <div class="top-box">
+        <h1>Welcome to the Book Recommendation System</h1>
+    </div>
+
+    <!-- Bottom Box -->
+    <div class="bottom-box">
+        <div class="form-container">
+            <h2>Create an Account</h2>
+            <form method="POST" action="/register">
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="first_name" placeholder="First Name" required />
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="middle_name" placeholder="Middle Name" />
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="last_name" placeholder="Last Name" required />
+                </div>
+                <div class="mb-3">
+                    <input type="email" class="form-control" name="email" placeholder="Email Address" required />
+                </div>
+                <div class="mb-3">
+                    <input type="date" class="form-control" name="dob" placeholder="Date of Birth" required />
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="username" placeholder="Username" required />
+                </div>
+                <div class="mb-3">
+                    <input type="password" class="form-control" name="password" placeholder="Password" required />
+                </div>
+                <button type="submit" class="btn btn-register">Register</button>
+            </form>
+            <p class="text-small mt-3">Already have an account? <a href="/login">Login here</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

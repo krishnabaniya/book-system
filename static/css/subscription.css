@@ -1,0 +1,60 @@
+body {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    padding-top: 3rem;
+}
+
+.plan-card {
+    background-color: #1a1a1a;
+    border: 1px solid #16a085;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(22, 160, 133, 0.3);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.plan-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 6px 20px rgba(26, 188, 156, 0.5);
+}
+
+.plan-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1abc9c;
+    margin-bottom: 1rem;
+}
+
+.plan-price {
+    font-size: 2rem;
+    color: #f39c12;
+    margin-bottom: 1rem;
+}
+
+.plan-features {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1.5rem;
+}
+
+.plan-features li {
+    padding: 0.4rem 0;
+    border-bottom: 1px dashed #2ecc71;
+}
+
+.btn-purchase {
+    background-color: #16a085;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-purchase:hover {
+    background-color: #1abc9c;
+}

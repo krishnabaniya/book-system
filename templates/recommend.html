@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block title %}Recommend{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/recommend.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ✅ Navbar -->
+{% include 'partials/navbar.html' %}
+
+<div class="container my-4">
+    <h1 class="text-center"><i class="fa-solid fa-star"></i> Recommended Books</h1>
+
+    {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+
+    <form method="post" action="/recommend_books" class="mb-4">
+        <input type="text" name="user_input" class="form-control" placeholder="Enter a book title">
+        <button type="submit" class="btn btn-warning mt-2">Submit</button>
+    </form>
+
+    <label for="genre-filter" class="form-label">Filter by Genre:</label>
+    <select id="genre-filter" class="form-select mb-3">
+        <option value="All">All</option>
+        <option value="Romantic">Romantic</option>
+        <option value="Science Fiction">Science Fiction</option>
+        <option value="Fantasy">Fantasy</option>
+        <option value="Thriller">Thriller</option>
+        <option value="Historical">Historical</option>
+    </select>
+
+    <div class="row g-4" id="book-grid">
+        {% for i in data %}
+        <div class="col-sm-6 col-md-4 col-lg-3 book-card" data-genre="{{ i[3] }}">
+            <div class="card">
+                <img class="card-img-top" src="{{ i[2] }}" alt="Book cover for {{ i[0] }}">
+                <div class="card-body">
+                    <h5>{{ i[0] }}</h5>
+                    <p>{{ i[1] }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="text-center mt-4">
+        <button class="btn btn-warning" id="show-more">Show More</button>
+    </div>
+</div>
+<!-- ✅ Footer -->
+{% include 'partials/footer.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const genreSelect = document.getElementById("genre-filter");
+    const showMoreBtn = document.getElementById("show-more");
+    const bookCards = document.querySelectorAll(".book-card");
+    let visibleCount = 0;
+    const batchSize = 10;
+
+    function filterAndShowBooks() {
+        const selectedGenre = genreSelect.value;
+        visibleCount = 0;
+        let shown = 0;
+        bookCards.forEach(card => {
+            const matchGenre = selectedGenre === "All" || card.dataset.genre === selectedGenre;
+            card.style.display = matchGenre && shown < batchSize ? "block" : "none";
+            if (matchGenre && shown < batchSize) shown++;
+        });
+
+        visibleCount = shown;
+        updateShowMoreVisibility();
+    }
+
+    function updateShowMoreVisibility() {
+        const selectedGenre = genreSelect.value;
+        const totalMatching = Array.from(bookCards).filter(card =>
+            selectedGenre === "All" || card.dataset.genre === selectedGenre
+        ).length;
+
+        showMoreBtn.style.display = visibleCount < totalMatching ? "inline-block" : "none";
+    }
+
+    genreSelect.addEventListener("change", filterAndShowBooks);
+
+    showMoreBtn.addEventListener("click", () => {
+        const selectedGenre = genreSelect.value;
+        let shown = 0;
+
+        bookCards.forEach(card => {
+            const matchGenre = selectedGenre === "All" || card.dataset.genre === selectedGenre;
+            if (matchGenre && card.style.display === "none" && shown < batchSize) {
+                card.style.display = "block";
+                shown++;
+                visibleCount++;
+            }
+        });
+
+        updateShowMoreVisibility();
+    });
+
+    window.addEventListener("load", filterAndShowBooks);
+</script>
+{% endblock %}
